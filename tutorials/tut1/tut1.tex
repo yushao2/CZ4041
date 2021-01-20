@@ -1,0 +1,286 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumerate}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Tutorial Week 2}
+\newcommand{\hmwkDueDate}{January 21, 2021}
+\newcommand{\hmwkClass}{CZ4001}
+\newcommand{\hmwkClassTime}{CS4}
+\newcommand{\hmwkClassInstructor}{Assoc Prof Pan, Sinno Jialin}
+\newcommand{\hmwkAuthorName}{\textbf{Pang Yu Shao}}
+\newcommand{\hmwkAuthorID}{\textbf{U1721680D}}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 8:30am}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ - \hmwkClassTime}}
+    \vspace{3in}\\
+    \hmwkAuthorName\\
+    \hmwkAuthorID
+}
+
+\date{21/01/2021}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}
+    Show how to estimate \(P(Y=0|X=0)\) and \(P(Y=2|X=0)\) on the 17th 
+    page of the lecture notes "Lecture 2a".\\\\
+
+    \textbf{Solution}\\
+    \textbf{For} \(\mathbf{P(Y=0|X=0)}\):\\
+    \[
+        \begin{split}
+        P(Y=0|X=0) &= \frac{P(X=0|Y=0) \times P(Y=0)}{P(X=0)}
+        \\\\
+        &= \frac{P(X=0|Y=0) \times P(Y=0)}{P(X=0, Y=0) + P(X=0, Y=1) + P(X=0, Y=2)}
+        \\\\
+        &= \frac{P(X=0|Y=0) \times P(Y=0)}{P(X=0|Y=0) \times P(Y=0) + 
+                                           P(X=0|Y=1) \times P(Y=1) + 
+                                           P(X=0|Y=2) \times P(Y=2)}
+        \\\\
+        &= \frac{0.54 \times 0.39}{0.54 \times 0.39 + 
+                                           0.44 \times 0.3 + 
+                                           0.49 \times 0.31}
+        \\\\
+        &= \frac{0.2106}{0.4945}
+        \\
+        &=\mathbf{0.426}
+        \end{split}
+    \]
+    \\\\
+    \textbf{For} \(\mathbf{P(Y=2|X=0)}\):\\
+    \[
+        \begin{split}
+        P(Y=2|X=0) &= \frac{P(X=0|Y=2) \times P(Y=2)}{P(X=0)}
+        \\\\
+        &= \frac{P(X=0|Y=2) \times P(Y=2)}{P(X=0, Y=0) + P(X=0, Y=1) + P(X=0, Y=2)}
+        \\\\
+        &= \frac{0.49 \times 0.31}{0.4945}
+        \\\\
+        &= \frac{0.1519}{0.4945}
+        \\
+        &=\mathbf{0.307}
+        \end{split}
+    \]
+
+
+
+\end{homeworkProblem}
+
+\pagebreak
+\begin{homeworkProblem}
+    Suppose that if a person has lung cancer, his/her probability of having
+    gene X is 0.9, and if a person does not have lung cancer, his/her probability of having
+    gene X is 0.2. The probability of a person having lung cancer is 0.01. Now, we know
+    that a patient A has gene X
+    \begin{enumerate}
+        \item Please use Bayesian decision theory with 0/1 loss to predict whether the patient
+        A has lung cancer or notes
+        \item Consider that costs of misclassification are different. Assume that the cost for
+        correct decisions is 0, the cost of misclassifying a person who does not have lung
+        cancer to be a person with lung cancer is 0.007, and the cost of misclassifying
+        a person who has lung cancer to be a healthy patient is 1. Please use Bayesian
+        decision theory with the predefined loss to predict whether the patient A has lung
+        cancer or not.
+    \end{enumerate}
+
+    \textbf{Solution}\\
+    \textbf{Part 1}\\
+    First, list down all information:
+    \begin{itemize}
+        \item \(P(X=1|LC=1) = 0.9\)
+        \item \(P(X=1|LC=0) = 0.2\)
+        \item \(P(LC=1) = 0.01\)
+        \item \(P(LC=0) = 0.99\)
+    \end{itemize}
+    Using Bayes Rule:
+    \begin{itemize}
+        \item \(P(LC=0|X=1) = \frac{P(X=1|LC=0) \times P(LC=0)}{P(X=1)} = 
+              \frac{0.198}{P(X=1)}\)
+        \item \(P(LC=1|X=1) = \frac{P(X=1|LC=1) \times P(LC=1)}{P(X=1)} = 
+              \frac{0.009}{P(X=1)}\)
+    \end{itemize}
+    Risk for taking action \(a_i\):
+    \(R(a_i|x) = \displaystyle\sum_{c=0}^{C-1} \lambda_{ic} P(y=c|x)\)
+    \\\\
+    Risk of predicting LC = 1 given X = 1:
+    \[
+        \begin{split}
+        R(a_{LC=1}|X=1) &= \displaystyle\sum_{c=0}^{C-1} \lambda_{ic} P(LC=c|X=1)
+        \\
+        &= 1*(P(LC=0|X=1)) + 0*(P(LC=1|X=1))
+        \\
+        &= 0.198/P(X=1)
+        \end{split}
+    \]
+    Risk of predicting LC = 0 given X = 1:
+    \[
+        \begin{split}
+        R(a_{LC=0}|X=1) &= \displaystyle\sum_{c=0}^{C-1} \lambda_{ic} P(LC=c|X=1)
+        \\
+        &= 0*(P(LC=0|X=1)) + 1*(P(LC=1|X=1))
+        \\
+        &= \mathbf{0.009}/P(X=1)
+        \end{split}
+    \]
+
+    Patient A is predicted to not have Lung Cancer
+
+    \pagebreak
+    \textbf{Part 2}\\
+    Risk of predicting LC = 1 given X = 1 (misclassification cost = 0.007):
+    \[
+        \begin{split}
+        R(a_{LC=1}|X=1) &= \displaystyle\sum_{c=0}^{C-1} \lambda_{ic} P(LC=c|X=1)
+        \\
+        &= 0.007*(P(LC=0|X=1)) + 0*(P(LC=1|X=1))
+        \\
+        &= \mathbf{0.001386}/P(X=1)
+        \end{split}
+    \]
+    Risk of predicting LC = 0 given X = 1 (misclassification cost = 1):
+    \[
+        \begin{split}
+        R(a_{LC=0}|X=1) &= \displaystyle\sum_{c=0}^{C-1} \lambda_{ic} P(LC=c|X=1)
+        \\
+        &= 0*(P(LC=0|X=1)) + 1*(P(LC=1|X=1))
+        \\
+        &= 0.009/P(X=1)
+        \end{split}
+    \]
+
+
+    Patient A is predicted to have Lung Cancer
+
+\end{homeworkProblem}
+
+\pagebreak
+
+
+    
+
+
+
+\end{document}
