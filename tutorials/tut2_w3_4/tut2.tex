@@ -1,0 +1,356 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumerate}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Tutorial Week 4}
+\newcommand{\hmwkDueDate}{February 4, 2021}
+\newcommand{\hmwkClass}{CZ4041}
+\newcommand{\hmwkClassTime}{CS4}
+\newcommand{\hmwkClassInstructor}{Assoc Prof Pan, Sinno Jialin}
+\newcommand{\hmwkAuthorName}{\textbf{Pang Yu Shao}}
+\newcommand{\hmwkAuthorID}{\textbf{U1721680D}}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 8:30am}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ - \hmwkClassTime}}
+    \vspace{3in}\\
+    \hmwkAuthorName\\
+    \hmwkAuthorID
+}
+
+\date{04/02/2021}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}
+    \begin{enumerate}
+        \item Estimate the conditionaal probabilities for \(P(A=1|+)\), \(P(B=1|+)\), \(P(C=1|+)\), \(P(A=1|-)\),
+        \(P(B=1|-)\), \(P(C=1|-)\)
+        \item Use the estimate of conditional probabilities given in the previous question to
+        predict the class label for a test example \((A = 1, B = 1, C = 1)\) using the naive
+        Bayes approach.        
+    \end{enumerate}
+    
+
+    \textbf{Solution}\\
+    1.\\
+    \[
+        \begin{split}
+        P(A=1|+) &= 0.5
+        \\
+        P(B=1|+) &= 0.5
+        \\
+        P(C=1|+) &= 1.0
+        \\
+        P(A=1|-) &= 0.333
+        \\
+        P(B=1|-) &= 0.333
+        \\
+        P(C=1|-) &= 0.333
+        \end{split}
+    \]
+
+    2.\\
+    \[
+        \begin{split}
+        P(+|A=1, B=1, C=1) &= \frac{P(+) * P(A=1|+)*P(B=1|+)*P(C=1|+)}{P(A=1,B=1,C=1)}
+        \\\\
+        &= \frac{P(+) * P(A=1|+)*P(B=1|+)*P(C=1|+)}{P(A=1,B=1,C=1)}
+        \\\\
+        &= \frac{0.4 * 0.5 * 0.5 *1}{P(A=1,B=1,C=1)}
+        \\\\
+        &= \mathbf{\frac{0.1}{P(A=1,B=1,C=1)}}
+        \\\\
+        P(-|A=1, B=1, C=1) &= \frac{P(-) * P(A=1|-)*P(B=1|-)*P(C=1|-)}{P(A=1,B=1,C=1)}
+        \\\\
+        &= \frac{P(-) * P(A=1|-)*P(B=1|-)*P(C=1|-)}{P(A=1,B=1,C=1)}
+        \\\\
+        &= \frac{0.6 * 0.333 * 0.333 *0.333}{P(A=1,B=1,C=1)}
+        \\\\
+        &= \frac{0.0222}{P(A=1,B=1,C=1)}
+        \\
+        \end{split}
+    \]
+
+
+
+\end{homeworkProblem}
+
+\pagebreak
+\begin{homeworkProblem}
+    On the 28th page of the lecture notes “Lecture 3”, recalculate the likelihoods using m-estimate. Compare the m-estimate method and the original method
+    shown on the 25th page for estimating probabilities. Which method is better and why?\\
+
+
+    \textbf{Solution}\\
+    \[
+        \begin{split}
+        P(HomO=Yes|No) &= \frac{3 + 3*2/3}{7+3}
+        \\&=0.5
+        \\
+        P(HomO=No|No) &= \frac{4 + 3*2/3}{7+3}
+        \\&=0.6
+        \\
+        P(HomO=Yes|Yes) &= \frac{0 + 3*1/3}{3+3}
+        \\&=1/6
+        \\
+        P(HomO=No|Yes) &= \frac{3 + 3*1/3}{3+3}
+        \\&=2/3
+        \\
+        P(Marital Status=Single|No) &= \frac{2+3*2/3}{7+3}
+        \\&=0.4
+        \\
+        P(Marital Status=Divorced|No) &= \frac{1+3*2/3}{7+3}
+        \\&=0.3
+        \\
+        P(Marital Status=Married|No) &= \frac{4+3*2/3}{7+3}
+        \\&=0.6
+        \\
+        P(Marital Status=Single|Yes) &= \frac{2+3*1/3}{3+3}
+        \\&=0.5
+        \\
+        P(Marital Status=Divorced|Yes) &= \frac{1+3*1/3}{3+3}
+        \\&=1/3
+        \\
+        P(Marital Status=Married|Yes) &= \frac{0+3*1/3}{3+3}
+        \\&=1/6
+        \end{split}
+    \]
+
+    This is not complete, this needs to be normalized.
+    \pagebreak
+    \[
+    \begin{split}
+        P(HomO=Yes|No) &= 0.5/(0.5+0.6)
+        \\&=0.455
+        \\
+        P(HomO=No|No) &= 0.6/(0.5+0.6)
+        \\&=0.545
+        \\
+        P(HomO=Yes|Yes) &= (1/6)/(1/6+2/3)
+        \\&=1/5
+        \\
+        P(HomO=No|Yes) &= (2/3)/(1/6+2/3)
+        \\&=4/5
+        \\
+        P(Marital Status=Single|No) &= 0.4/(0.4+0.3+0.6)
+        \\&=0.308
+        \\
+        P(Marital Status=Divorced|No) &= 0.3/(0.4+0.3+0.6)
+        \\&=0.231
+        \\
+        P(Marital Status=Married|No) &= 0.6/(0.4+0.3+0.6)
+        \\&=0.461
+        \\
+        P(Marital Status=Single|Yes) &= 0.5/(0.5+1/3+1/6)
+        \\&=0.5
+        \\
+        P(Marital Status=Divorced|Yes) &= (1/3)/(0.5+1/3+1/6)
+        \\&=1/3
+        \\
+        P(Marital Status=Married|Yes) &= (1/6)/(0.5+1/3+1/6)
+        \\&=1/6
+    \end{split}
+    \]
+
+
+
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    \textbf{Bayesian Belief Networks (Week 4)}\\
+    If the person has high blood pressure, but exercises regularly and eats a healthy diet, 
+    diagnose whether he has heart disease.
+    \\
+    \textbf{Solution}\\
+    \[
+    \begin{split}
+        P(HD=Yes|BP=High, D=Healthy, E=Yes) &= \frac{P(HD=Yes, BP=High, D=Healthy, E=Yes)}{P(BP=High, D=Healthy, E=Yes)}
+        \\\\
+    \end{split}
+    \]
+    \[
+    \begin{split}
+        = \frac{P(BP=High|HD=Yes,D=Healthy,E=Yes)P(HD=Yes,D=Healthy,E=Yes)}{P(BP=High, D=Healthy, E=Yes)}&
+        \\\\
+        = \frac{P(BP=High|HD=Yes)P(HD=Yes,D=Healthy,E=Yes)}{P(BP=High, D=Healthy, E=Yes)}&
+        \\\\
+        = \frac{0.85 * P(HD=Yes|D=Healthy,E=Yes) * P(D=Healthy,E=Yes)}{P(BP=High| D=Healthy, E=Yes)*P(D=Heahtly,E=Yes)}&
+        \\\\
+        = \frac{0.85 * 0.25}{P(BP=High| D=Healthy, E=Yes)}&
+    \end{split}
+    \]
+    \\\\\\
+    \[
+    \begin{split}
+        P(HD=No|BP=High, D=Healthy, E=Yes) &= \frac{P(HD=No, BP=High, D=Healthy, E=Yes)}{P(BP=High, D=Healthy, E=Yes)}
+        \\\\
+    \end{split}
+    \]
+    \[
+    \begin{split}
+        = \frac{P(BP=High|HD=No,D=Healthy,E=Yes)P(HD=No,D=Healthy,E=Yes)}{P(BP=High, D=Healthy, E=Yes)}&
+        \\\\
+        = \frac{P(BP=High|HD=No)P(HD=No,D=Healthy,E=Yes)}{P(BP=High, D=Healthy, E=Yes)}&
+        \\\\
+        = \frac{0.2 * P(HD=No|D=Healthy,E=Yes) * P(D=Healthy,E=Yes)}{P(BP=High| D=Healthy, E=Yes)*P(D=Heahtly,E=Yes)}&
+        \\\\
+        = \frac{0.2 * 0.75}{P(BP=High| D=Healthy, E=Yes)}&
+    \end{split}
+    \]
+    \pagebreak
+
+    \[
+    \begin{split}
+        \frac{0.85 * 0.25}{P(BP=High| D=Healthy, E=Yes)} + \frac{0.2 * 0.75}{P(BP=High| D=Healthy, E=Yes)} &= 1
+        \\\\
+        \frac{0.3625}{P(BP=High| D=Healthy, E=Yes)}&= 1
+        \\\\
+        P(BP=High| D=Healthy, E=Yes) &= 0.3625
+    \end{split}
+    \]
+    Therefore,
+    \[
+    \begin{split}
+        P(HD=Yes|BP=High, D=Healthy, E=Yes) &= \frac{0.85 * 0.25}{0.3625}
+        \\\\
+        &=\mathbf{0.5862}
+        \\\\
+        P(HD=No|BP=High, D=Healthy, E=Yes) &= \frac{0.2*0.75}{0.3625}
+        \\\\
+        &=\mathbf{0.4138}
+    \end{split}
+    \]    
+
+
+
+\end{homeworkProblem}
+    
+
+
+
+\end{document}
