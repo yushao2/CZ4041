@@ -263,15 +263,120 @@
             &= 0.214
         \end{split}
     \]
-    
+            
 
+\end{homeworkProblem}
+\newpage
+\begin{homeworkProblem}
+    A dataset of five 4-dimensional instances is given in Table 1. Suppose a SVD is performed 
+    on the data matrix X (5-by-4) via $X = VDU^T$, and the matrices U, D and V are shown in Tables 2-4,
+    respectively. Use principal component analysis to project the 5 datapoints in Table 1 to 2-dimensional
+    space.
+
+    \begin{figure}[H]
+        \begin{center}
+        \includegraphics[scale=0.7]{resources/12a.PNG}
+        \end{center}
+    \end{figure}
+    \begin{figure}[H]
+        \begin{center}
+        \includegraphics[scale=0.7]{resources/12b.PNG}
+        \end{center}
+    \end{figure}
+    \begin{figure}[H]
+        \begin{center}
+        \includegraphics[scale=0.7]{resources/12c.PNG}
+        \end{center}
+    \end{figure}
+    \begin{figure}[H]
+        \begin{center}
+        \includegraphics[scale=0.7]{resources/12d.PNG}
+        \end{center}
+    \end{figure}
+    \newpage
+    \textbf{Solution}\\
+    First, we center the datapoints in X
+    \[
+    \begin{split}
+        X &= 
+        \begin{bmatrix}
+            2 & 4 & 1 & 3 \\
+            1 & 2 & 3 & 5 \\
+            -2 & -4 & -4 & -1\\
+            0 & -1 & -2 & -6\\
+            -1 & -1 & 2 & -1
+        \end{bmatrix}
+        \\\\
+        \mu &= \begin{bmatrix}
+            0&0&0&0 \\
+        \end{bmatrix}
+        \\
+    \end{split}    
+    \]
+    Therefore, datapoints are already centered.\\\\
+    2. Calculate the covariancematrix $\tilde{\Sigma}$,
+    \[
+    \begin{split}
+        \tilde{\Sigma} &= \frac{1}{5-1}X^TX
+        \\
+        &= U\tilde{D}U^T, \tilde{D} = \frac{1}{4}D^TD 
+        \\
+    \end{split}    
+    \]
+    3. Find Eigenvalues/ Eigenvectors of the Covariance matrix.\\
+    Since $U^TU = I$,
+    \[
+    \begin{split}
+        \tilde{\Sigma}U &= \tilde{D}U
+        \\
+        \tilde{D} &= \frac{1}{4}\begin{bmatrix}
+            10.90^2 & 0 & 0 & 0 \\
+            0 & 4.84^2 & 0 & 0 \\
+            0 & 0 & 3.40^2 & 0\\
+            0 & 0 & 0 & 0.39^2\\
+        \end{bmatrix}
+    \end{split}    
+    \]
+    Therefore, the first two columns of the U matrix correspond to the 
+    top two eigenvectors with the highest eigenvalues. We select the first 2 columns
+    to construct the top 2 principal components.
+    \[
+    \begin{split}
+        XU &= \begin{bmatrix}
+            2 & 4 & 1 & 3 \\
+            1 & 2 & 3 & 5 \\
+            -2 & -4 & -4 & -1\\
+            0 & -1 & -2 & -6\\
+            -1 & -1 & 2 & -1
+        \end{bmatrix}
+        \begin{bmatrix}
+            -0.2224 & 0.3430\\
+            -0.4880 & 0.5756\\
+            -0.4479 & 0.2924\\
+            -0.7154 & -0.6823
+        \end{bmatrix}
+        \\
+        &=\begin{bmatrix}
+            -4.99 & 1.23\\
+            -6.12 & -1.04\\
+            4.90 & -3.48\\
+            5.68 & 2.93\\
+            0.53 & 0.35
+        \end{bmatrix}
+    \end{split}    
+    \]
+
+    \begin{figure}[H]
+        \begin{center}
+        \includegraphics[scale=0.9]{resources/pca.PNG}
+        \end{center}
+    \end{figure}
 
 
 
         
 
 \end{homeworkProblem}
-
 
 
 \end{document}
