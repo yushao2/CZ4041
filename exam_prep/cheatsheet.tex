@@ -1,0 +1,43 @@
+\documentclass[10pt,landscape,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+%\usepackage[LY1,T1]{fontenc}
+%\usepackage{frutigernext}
+%\usepackage[lf,minionint]{MinionPro}
+\usepackage{tikz}
+\usetikzlibrary{shapes,positioning,arrows,fit,calc,graphs,graphs.standard}
+\usepackage[nosf]{kpfonts}
+\usepackage[t1]{sourcesanspro}
+\usepackage{multicol}
+\usepackage{wrapfig}
+\usepackage[top=5mm,bottom=5mm,left=5mm,right=5mm]{geometry}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{microtype}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+\DeclareMathOperator*{\argmax}{\arg\!\max}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+
+
+\let\bar\overline
+
+\include{sections/def}
+
+\begin{document}
+%\footnotesize
+\small
+\begin{multicols*}{5}
+\input{sections/bayesian_cl.tex}
+\input{sections/naivebayes.tex}
+
+% \input{sections/mengen}
+% \input{sections/relationen}
+% \input{sections/abbildungen}
+% \input{sections/beweise} 
+% \input{sections/graphen}
+% \input{sections/graphalgo}
+% \input{sections/bool}
+% \input{sections/formeln}
+\end{multicols*}
+\end{document}

@@ -1,0 +1,47 @@
+
+\section{Na\"{i}ve Bayes Classifiers}
+\subsection*{Independence}
+A is \textbf{independent} of B, if:\\
+$P(A,B) = P(A|B)\times P(B) = P(A)\times P(B)$\\
+$P(A,B) = P(B|A)\times P(A) = P(A)\times P(B)$\\
+Or,\\
+$P(A|B) = P(A)$\\
+$P(B|A) = P(B)$\\
+\subsection*{Conditional Independence}
+A is \textbf{conditionally independent} of B, given C if:\\
+$P(A|B,C) = P(A|C)$\\
+\subsection*{Na\"{i}ve Bayes Classifier}
+1. Assumption: conditional independence of features given label\\
+\[p(\mathbf{x}|y = c) = P(x_1,...,x_d|y=c)\]
+\[ = P(x_1|y=c)P(x_2|y=c)...P(x_d|y=c)\]
+\[ = \prod^{d}_{i=1}P(x_i|y=c)\]
+To classify a test record $\mathbf{x^*}$, compute the posteriors for 
+each class:\\
+\[p(y=c|\mathbf{x^*}) = \frac{(\prod^{d}_{i=1}P(x_i^*|y=c))P(y=c)}{P(\mathbf{x^*})}\]
+Since $P(\mathbf{x^*})$ is constant for each class c, it is sufficient 
+to choose the class that maximises the numerator term.
+\[y^* = \argmax_c (\prod^{d}_{i=1}P(x_i^*|y=c))P(y=c)\]\\
+
+\subsection*{Estimating Cond Prob (Discrete)}
+\[P(x_i = k| y = c) = \frac{|(x_i - k)\wedge (y=c)|}{|y=c|}\]
+\subsection*{Estimating Cond Prob (Continuous)}
+\[P(x_i|y=c) = \frac{1}{\sqrt{2\pi \sigma^2_{ic}}}e^{-\frac{(x_i-\mu_{ic})^2}{2\sigma^2_{ic}}}\]
+Supposing there are $N_c$ instances in class c,\\
+Sample mean:
+\[\mu_{ic} = \frac{1}{N_c}\sum^{N_c}_{j=1}x_{ij}\]
+Sample variance:
+\[\sigma^2_{ic} = \frac{1}{N_c-1}\sum^{N_c}_{j=1}(x_{ij}-\mu_{ic})^2\]
+
+\subsection*{Laplace Estimate}
+Alternative prob estimation for discrete features.
+\[P(x_i = k| y = c) = \frac{|(x_i - k)\wedge (y=c)|+1}{|y=c|+n_i}\]
+where $n_i$ is \#distinct values of $x_i$.
+In extreme cases with no training data, $P(x_i = k| y = c) = \frac{1}{n_i}$\\
+
+\subsection*{M-estimate}
+A more general estimation:
+\[P(x_i = k| y = c) = \frac{|(x_i - k)\wedge (y=c)|+m\times \tilde{P}(x_i = k| y = c)}{|y=c|+m}\]
+Where $m$ is a hyperparameter and $\tilde{P}(x_i = k| y = c)$ is prior information of ${P}(x_i = k| y = c)$. 
+(e.g., domain knowledge)
+
+Extreme case with no training data: $P(x_i = k| y = c) = \tilde{P}(x_i = k| y = c)$

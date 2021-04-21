@@ -1,0 +1,50 @@
+
+\section{Bayesian Classifiers}
+\subsection*{Probabilities}
+\subsection*{Sum Rule}
+$P(A) = \sum_B P(A,B)$\\
+$P(A) = \sum_B\sum_C P(A,B,C)$\\
+\subsection*{Product Rule}
+$P(A,B) = P(B|A)\times P(A) = P(A|B)\times P(B)$\\
+\subsection*{Bayes Theorem}
+\[P(A|B) = \frac{P(A,B)}{P(B)} = \frac{P(B|A)P(A))}{P(B)}\]\\
+(Generalised case)\\
+\[P(A_1...A_k|B_1...B_p) = \frac{P(B_1...B_p,A_1...A_k)}{P(B_1...B_p)}\]\\
+\subsection*{Bayesian Classifiers}
+Bayesian classifiers aim to find the mapping $f: \mathbf{x} \Rightarrow y$
+for supervised learning in the form of conditional probability $P(y|\mathbf{X})$
+via Bayes rule.
+\[P(y|\mathbf{X}) = \frac{P(y, \mathbf{X})}{P(\mathbf{X})} = \frac{P(\mathbf{X}|y)P(y)}{P(\mathbf{X})}\]\\
+For a classification with C classes, given a data instance $\mathbf{x^*}$:\\
+\[y^* = c^* if c^* = \argmax_c P(y=c|\mathbf{x^*})\]\\
+Applying Bayes rule,\\
+\[P(y=c|\mathbf{x^*}) = \frac{P(\mathbf{x^*}| y=c)P(y=c)}{P(\mathbf{x^*})}\]\\
+Therefore,\\
+\[y^* = \argmax_c \frac{P(\mathbf{x^*}| y=c)P(y=c)}{P(\mathbf{x^*})}\]\\
+\[= \argmax_c P(\mathbf{x^*}| y=c)P(y=c)\]\\
+
+\section{Bayesian Decision Theory}
+Incorporating cost of misclassification on top of simple Bayesian Classifiers.
+\subsection*{Loss/Cost}
+Actions: $a_c$, i.e., predict $y=c$\\
+Define $\lambda_{ij}$ as the cost of $a_i$ when optimal action is $a_j$. E.g.:\\
+$\lambda_{00} = 0$ (predict correctly)\\
+$\lambda_{11} = 0$ (predict correctly)\\
+$\lambda_{01} = 10$ misclassify 1 as 0\\
+$\lambda_{00} = 1$ misclassify 0 as 1\\
+\subsection*{Expected Risk}
+Expected risk for taking action $a_i$:\\
+\[R(a_i|\mathbf{x}) = \sum^{C-1}_{c=0}\lambda_{ic}P(y=c|\mathbf{x})\]\\
+To classify, for all actions, calculate expected risk, then choose the action 
+with the minimum risk.
+\subsection*{Special Case: 0/1 loss}
+\[\lambda_{ij} = \begin{cases}
+    0 \text{ if } i = j \\
+    1 \text{ if } i \neq j
+\end{cases}\]
+$\therefore R(a_i|\mathbf{x}) = 1 - P(y=i|\mathbf{x})$\\
+In this case,\\
+\[\text{Choose } a_i \text{ if } R(a_i|\mathbf{x}) = \min_{a_c}R(a_c|\mathbf{x})\]
+Is equivalent to:\\
+\[\text{Predict } y = c^* \text{ if } P(y=c^*|\mathbf{x}) = \max_{c}P(y=c|\mathbf{x})\]
+
