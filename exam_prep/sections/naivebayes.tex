@@ -40,8 +40,8 @@ In extreme cases with no training data, $P(x_i = k| y = c) = \frac{1}{n_i}$\\
 
 \subsection*{M-estimate}
 A more general estimation:
-\[P(x_i = k| y = c) = \frac{|(x_i - k)\wedge (y=c)|+m\times \tilde{P}(x_i = k| y = c)}{|y=c|+m}\]
-Where $m$ is a hyperparameter and $\tilde{P}(x_i = k| y = c)$ is prior information of ${P}(x_i = k| y = c)$. 
+\[P(x_i = k| y = c) = \\\\\frac{|(x_i - k)\wedge (y=c)|+m\tilde{P}}{|y=c|+m}\]
+Where $m$ is a hyperparameter and $\tilde{P}$ is prior information of ${P}(x_i = k| y = c)$. 
 (e.g., domain knowledge)
 
 Extreme case with no training data: $P(x_i = k| y = c) = \tilde{P}(x_i = k| y = c)$
