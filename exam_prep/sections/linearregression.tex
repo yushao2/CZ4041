@@ -1,0 +1,21 @@
+\section{Linear Regression}
+\subsection*{Error for 1-D Linear Regression Model}
+Sum-of-squares (SSE) error:
+\[E(w) = \frac{1}{2}\sum^N_{i=1}(w \times x_i - y_i)^2\]
+
+Learn linear model in terms of w by minimising the error\\
+\[w^* = \argmin_w E(w)\]
+To solve the unconstrained minimisation problem, set derivative of $E(w)$ w.r.t $w$ to zero
+\[\frac{\partial E(w)}{\partial w} = \frac{\partial (\frac{1}{2}\sum^N_{i=1}(w \times x_i - y_i)^2)}{\partial w} = 0\]
+Closed form solution:
+\[w = \frac{\sum^N_{i=1} y_i \times x_i}{\sum^N_{i=1} x_i^2}\]
+\subsection*{More general case (multi-dimension)}
+$f(\mathbf{x}) = \mathbf{w}\cdot\mathbf{x} + b$\\\\
+- By defining $w_0 = b$ and $X_0 = 1$, $w$ and $x$ are of d+1 dimensions\\
+$f(\mathbf{x}) = \mathbf{w}\cdot\mathbf{x}$
+\subsection*{Error for Linear Regression Model}
+\[E(\mathbf{w}) = \frac{1}{2}\sum^N_{i=1}(\mathbf{w} \cdot \mathbf{x}_i - y_i)^2\]
+Learn linear model in terms of $\mathbf{w}$ by minimizing the error (with regularisation term)
+\[\mathbf{w^*} = \argmin_w E(\mathbf{w}) + \frac{\lambda}{2}||\mathbf{w}||_2^2\]
+\subsection*{Closed-Form Solution}
+\[\mathbf{w} = (\mathbf{X}^T\mathbf{X} + \lambda \mathbf{I})^{-1}\mathbf{X}^Ty\]

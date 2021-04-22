@@ -1,0 +1,32 @@
+\section{ANN}
+$y = \text{sign}(\mathbf{w} \cdot \mathbf{x})$\\
+$w_0 = -\theta,\ X_0 = 1$\\
+Where $\theta$ is the threshold term, $\mathbf{w}$ is the weights vector and 
+$\mathbf{x}$ is the input vector. An additional dimension is added to both vectors 
+such that the sum of products would minus the threshold term, $\theta$.
+\subsection*{Activation functions}
+\subsection*{Sign Activation function}
+\[\text{sign}(z) = \begin{cases}
+    1,\hfill z\geq 0\\
+    -1,\hfill \text{otherwise}
+\end{cases}\]
+Since function is not differentiable, 
+when finding derivative of the activation function, we set 
+y = z, and the derivative of y with respect to z would be = 1
+
+\subsection*{Sigmoid Activation function}
+\[a(z) = \frac{1}{1+e^{-\lambda z}}\]
+When $\lambda = 1$, it's called the sigmoid function.\\\\
+Derivative of sigmoid: 
+\[\frac{\partial \hat{y}(z)}{\partial z} = y(z)\cdot (1 - y(z))\]
+
+
+\subsection*{Error/Loss}
+\[E = \frac{1}{2}(y_i - \hat{y}_i)^2\]
+\subsection*{Updating Weights}
+\[\mathbf{w}_{t+1} = \mathbf{w}_{t} - \lambda \frac{\partial E(\mathbf{w})}{\partial \mathbf{w}}\]
+Applying chain rule:
+\[\mathbf{w}_{t+1} = \mathbf{w}_{t} - \lambda \frac{\partial E(\hat{y})}{\partial \hat{y}}\frac{\partial \hat{y}(z)}{\partial z}\frac{\partial z(\mathbf{w})}{\partial \mathbf{w}}\]
+\[\mathbf{w}_{t+1} = \mathbf{w}_{t} - \lambda (-(y_i - \hat{y}_i))(1)(\mathbf{x}_i)\]
+\[\mathbf{w}_{t+1} = \mathbf{w}_{t} - \lambda (-(y_i - \hat{y}_i))(1)(\mathbf{x}_i)\]
+\[\mathbf{w}_{t+1} = \mathbf{w}_{t} + \lambda (y_i - \hat{y}_i)\mathbf{x}_i\]

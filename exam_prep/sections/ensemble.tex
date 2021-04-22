@@ -1,0 +1,44 @@
+\section{Ensemble Learning}
+\subsection*{Necessary Conditions}
+1) Base classifiers are independent of each other\\
+2) Base classifiers should do better than classifier that performs random guessing (i.e., acc > 0.5)
+\subsection*{Error rate of ensemble}
+Supposing N independent base classifiers with error $\epsilon$:\\
+\[P = \sum^N_{i = (N//2) + 1} \epsilon^i(1-\epsilon)^{N-i}\]
+\subsection*{Ensemble Methods}
+\subsection*{Bagging}
+- Sample examples \textbf{with replacement} and build model on each bootstrap sample.\\
+- Use majority voting to determine class label of ensemble classifier\\
+- A bootstrap sample contains approximately 63.2\% of original training data
+\subsection*{Boosting}
+1) Initially, all examples are assigned equal weights\\
+2) Bootstrap sample is drawn and a model is trained from sample\\
+3) Model is then used to classify examples from training set\\
+4) Update weights of examples after the end of boosting round\\
+\begin{itemize}
+    \item Wrongly classified - increase
+    \item Correctly classified - decrease
+    \item Examples not drawn - unchanged
+\end{itemize}
+5) Use weighted voting, each classifier would have different weights
+\subsection*{Random Forests}
+- Specifically designed for decision tree classifiers
+1) Choose T, number of trees to grow\\
+2) Choose m', number of features used to calculate best split (Typically 20\%)\\
+3) For each tree\\
+- Choose training set via bootstrapping\\
+- For each node, randomly choose m' features and calculate best split\\
+- Trees fully grown and not pruned\\
+4) Use majority vote among all trees
+\subsection*{Combination Methods}
+- Majority voting\\
+- Weighted voting\\
+- Simple average:\\
+$f_M(\mathbf{x}) = \frac{1}{T}\sum^T_{i=1}f_i(\mathbf{X})$\\
+- Weighted average:\\
+$f_M(\mathbf{x}) = \frac{1}{T}\sum^T_{i=1}w_if_i(\mathbf{X})$\\
+Where $w_i \geq 0$, and $\sum^T_{i=1}w_i = 1$\\
+\subsection*{Combining by Learning}
+Combiner: second-level learner, or meta-learner\\
+Combiner takes output of base classifiers as features, and learn to classify 
+based on output label.

@@ -1,0 +1,29 @@
+\section{KNN Classifiers}
+- Instance based, lazy learner - no model built\\
+- - "Training"\ is very efficient\\
+- - Classifying unknown test instances are relatively expensive\\
+- Requires training data to be stored in memory\\\\
+Classification steps:\\
+1. Compute distance to other training instances\\
+2. Identify K nearest neighbors\\
+3. Use class labels of neighbors to determine class of instance\\\\
+\subsection*{Choosing K}
+- K too small, sensitive to noise\\
+- K too large, neighborhood may include points from other classes\\
+\subsection*{Distance Metric}
+Euclidean distance:\\
+\[d(\mathbf{x}_i,\mathbf{x}_j) = \sqrt{\sum^{d}_{k=1}(x_{ik} - x_{jk})^2}\]
+\subsection*{Voting Schemes}
+- Majority voting (sensitive to choice of k)\\
+- Distance-weight voting (weight the influence of neighbor $x_i$ according to distance to test data)\\
+\[w_i = \frac{1}{d(x^*, x_i)^2}\]
+\[y^* = \argmax_c \sum_{(x_i, y_i)\in\mathcal{N}_{x^*}} w_i \times I(c = y_i) \]
+\subsection*{Other issues with KNN}
+Scaling issues - features may need to be scaled\\
+Solution: Normalisation on features of different scales.
+\subsection*{Normalisation}
+- Min-max normalisation\\
+\[v_{\text{new}} = \frac{v_{\text{old}}-\text{min}_{\text{old}}}{\text{max}_{\text{old}}-\text{min}_{\text{old}}}(\text{max}_{\text{new}}-\text{min}_{\text{new}}) \]
+- Standardisation (z-score normalisation)\\
+($\mu$: mean, $\sigma$:standard deviation)\\
+\[v_{\text{new}} = \frac{v_{\text{old}} - \mu_{\text{old}}}{\sigma_{\text{old}}}\]
