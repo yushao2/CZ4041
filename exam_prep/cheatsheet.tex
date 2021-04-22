@@ -11,7 +11,7 @@
 \usepackage[t1]{sourcesanspro}
 \usepackage{multicol}
 \usepackage{wrapfig}
-\usepackage[top=5mm,bottom=5mm,left=5mm,right=5mm]{geometry}
+\usepackage[top=5mm,bottom=5mm,left=2mm,right=1mm]{geometry}
 \usepackage[framemethod=tikz]{mdframed}
 \usepackage{microtype}
 \usepackage{pdfpages}
@@ -27,10 +27,14 @@
 \begin{document}
 %\footnotesize
 \small
+\setlength{\columnsep}{2pt}
 \begin{multicols*}{5}
 \input{sections/bayesian_cl.tex}
 \input{sections/naivebayes.tex}
 \input{sections/bbn.tex}
+\input{sections/decision_tree.tex}
+\newpage
+\input{sections/generalisation.tex}
 
 % \input{sections/mengen}
 % \input{sections/relationen}

@@ -1,0 +1,27 @@
+\section{Generalisation}
+\underline{Overfitting}: Test error rate increase when training error decrease\\
+\underline{Underfitting}: Model too simple, both training and test error large\\
+\\
+\underline{Training errors}: error on training set, $e(T)$\\
+\underline{Generalisation errors}: error on previously unseen testing set, $e'(T)$\\
+\subsection*{Estimating Generalisation Errors}
+\subsection*{Optimistic Estimate}
+Assume training set is good representation of overall data\\
+$e'(T) = e(T)$\\
+Decision tree induction algo select model with lowest training error rate.\\
+\subsection*{Occam's Razor}
+Include information of model complexity when evaluating a model.\\
+$e'(T) = e(T) + N\times k$\\
+where N is the number of leaf nodes and k is a hyperparameter $k > 0$
+\subsection*{Using Validation Set}
+Divide training data to 2 subsets, 1 for training and 1 for estimating
+generalisation error.
+
+\subsection*{Addressing overfitting}
+\subsection*{Pre-Pruning}
+- Stop if number of instances is less than user-specified threshold\\
+- Stop if expanding current node does not improve generalisation errrors
+\subsection*{Post-Pruning}
+- Grow tree to its entirety\\
+- Trim nodes in bottom-up fashion\\
+- If generalisation error improves after trimming, replace sub-tree by new leaf\\

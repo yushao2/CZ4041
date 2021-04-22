@@ -1,0 +1,43 @@
+\section{Decision Trees}
+- Greedy strategy, split records based on feature test that optimises
+certain criterion\\
+Key issues:\\
+1) How to split the records?\\
+- Specifying feature test condition\\
+- Determining best split\\
+2) When to stop splitting?\\
+\subsection*{Determining Test Conditions}
+\subsection*{Splitting based on binary features}
+2 Possible outcomes (e.g. Yes/No)
+\subsection*{Splitting based on discrete features}
+- Multi-way split: Use as many partitions as distinct values\\
+e.g.: Marital Status $\Rightarrow$ [Single], [Divorced], [Married]
+\\\\
+- Binary split: Divides possible values as 2 subsets, need to find optimal 
+partitioning\\
+e.g.: Marital Status $\Rightarrow$ [{Single, Divorced}], [Married]
+\subsection*{Splitting based on continuous features}
+- Binary split: $(x_j < v)$ or $(x_j \geq v)$\\\\
+- Multi-way split (Discretization)\\\\
+Consider all possible splits and find the best cut\\
+Can be very computationally intensive\\
+\subsection*{Determining Best Split}
+Using measure of node impurity -- favour split with low degree of impurity
+\subsection*{Measure of Impurity: Entropy}
+Entropy at a given node t:\\
+\[E(t) = -\sum_c P(y=c;t)log_2P(y=c;t)\]
+\subsection*{Information Gain}
+$\Delta_{info}=E(\text{parent}) - E(\text{children})$
+\\
+To get entropy for children, get entropy of all children nodes and 
+normalize by \# of training examples in each child node. Suppose a parent 
+node t is split into P partitions (children),\\
+$\Delta_{info}=E(t) - \sum^{P}_{j=1}\frac{n_j}{n}E(j)$\\\\
+Disadvantage: Tends to prefer splits that result in large number of partitions.
+\subsection*{Penalizing large number of partitions (Gain Ratio)}
+\[\Delta_{\text{InfoR}} = \frac{\Delta_{\text{info}}}{\text{SplitINFO}}\]
+\[\text{SplitINFO} = -\sum^{P}_{i=1}\frac{n_i}{n}log_2(\frac{n_i}{n})\]
+\subsection*{Stopping Criterias}
+1. All data belong to same class\\
+2. Stop expanding when all data have similar feature vals\\
+3. Early termination (avoid overfitting)
