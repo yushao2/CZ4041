@@ -1,0 +1,100 @@
+\section{Clustering}
+\subsection*{Cluster Analysis}
+- Finding groups of data instances such that data instances in a group are:
+\begin{itemize}
+    \item Similar to one another
+    \item Different from data in other groups
+\end{itemize}
+It is \textbf{NOT}:\\
+- Supervised classification (class label info available)\\
+- Simple segmentation (e.g. divide examples into groups by properties/feature value)\\
+
+\subsection*{Types of clusterings}
+- Partitional (non-overlapping)\\
+- Hierarchical (nested)\\
+- Exclusive/Non-exclusive (instance belonging to multiple cluster)\\
+- Fuzzy/Non-fuzzy (point belongs to every cluster with weight (sums to 1))\\
+- Partial/Complete (Only some instances clustered for partial)\\
+
+\subsection*{K-means}
+- Partitional clustering\\
+Preprocessing:\\
+- Normalize data\\
+- Eliminate outliers\\\\
+Algorithm:\\
+1) Select k data as initial centroids\\
+Loop while centoids' values are updated,\\
+2) Form k clusters by assigning data instances to closest centroid\\
+3) Recompute the centroid of each cluster (mean of data instances in cluster)\\\\
+Note: performance affected greatly by choie of initial centroids.
+
+\subsection*{Evaluation of K-means clusters}
+Total Sum of squared error (SSE)\\
+\[SSE = \sum^K_{i=1}\sum_{\mathbf{x}\in C_i} \text{dist}(\mathbf{c}_i, \mathbf{x})^2\]
+
+\subsection*{Solving Initial Centoids Issue}
+1) Multiple runs, choose run with lowest SSE\\
+2) Post-processing:\\
+- Decompose cluster with high Cluster SSE\\
+- Merge clusters with low cluster SSE, which are close to each other\\
+3) Bisecting K-means
+
+\subsection*{Empty Clusters Issue}
+Choose replacement centroid:\\
+- Choose point that contributes most to SSE\\
+- Choose a point from cluster with highest cluster SSE\\
+- Repeat several times if there are multiple empty clusters\\
+
+\subsection*{Bisecting K-means}
+Start with 1 cluster containing all points\\
+While the number of clusters is less than K:\\
+1) Select the cluster with the largest SSE\\
+2) Bisect the cluster with simple K-means (2 cluster) T times,\\
+2a) Choose the split with the lowest SSE from the T number of results\\
+2b) Add the split clusters into the list of clusters\\
+
+\subsection*{K-means limitations}
+K-means has problems when clusters have differing:\\
+- Sizes\\
+- Densities\\
+Or when clusters have non-globular shapes\\
+K-means also sensitive when data has outliers
+
+\subsection*{Hierarchical Clustering}
+- Nested clusters organised as hierarchical tree\\
+(Visualised as dendrogram)\\\\
+Strengths:\\
+- Do not have to assume number of clusters, can obtain desired 
+number by cutting the dendrogram at the proper level.\\\\
+Types:\\
+- Agglomerative (Start with 1 cluster per instance, then merge until 1 big cluster)\\
+- Divisive (Start with 1 cluster with all points, split at each step until 1 cluster/instance or when 
+there are K clusters)
+
+\subsection*{Agglomerative}
+- Merge most similar clusters at each step\\
+- Update cluster proximity based on type of Inter-Cluster Similarity:\\
+- MIN: Proximity = closest points in different clusters\\
+- MAX: Proximity = furthest points in different clusters\\
+- Group Average: Proximity = average of pairwise distance for all points in clusters\\
+
+\subsection*{Limitations}
+- Once clusters are combined, can't be undone (errors propogated)\\
+- No objective function is minimized\\
+- Different schemes have issues with the following:\\
+1) Sensitive to noise/outliers\\
+2) Difficulty handling different sized clusters\\
+
+\subsection*{Divisive Hierarchical Clustering}
+Algorithm:\\
+1) Generate minimum spanning tree to collect all instances as single cluster\\
+2) While all clusters are not singleton clusters (Or while number of clusters < K):\\
+3) Create a new cluster by breaking the link corresponding to largest distance.
+
+\subsection*{Building MST}
+Algorithm:\\
+1) Start with tree with a single point (random)\\\\
+While there are points not in the tree:\\
+2) Look for the closest pair of points such that 1 point is in current tree and the other is not.\\
+3) Add the point into the tree and an edge (with a value of the distance) between the two points
+
